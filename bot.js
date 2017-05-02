@@ -1,14 +1,3 @@
-//--------------------------------------------------------------------------
-//----- AssHat Hunter v0.0.1 || Open Source Anti-Asshat Node.js Script -----
-//----- Developed by @KLYE || Free to Use for All! || Free to Modify -------
-//----- Rekuirements to run: Node.js + steem.js + node-datetime  -----------
-//----- npm install steem --save  ||  npm install node-datetime --save -----
-//--------------------------------------------------------------------------
-//----- PLEASE DO NOT USE THIS CODE BELOW MALICIOUSLY / FOR EVIL DEEDS -----
-//--------------------------------------------------------------------------
-
-
-//----- CONFIG + Get Rekuirements 
 
 // ***IMPORTANT*** Your Account Name Below (No @)
 var hero = 'daniel.dalo';
