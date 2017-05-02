@@ -1,3 +1,14 @@
+//--------------------------------------------------------------------------
+//----- AssHat Hunter v0.0.1 || Open Source Anti-Asshat Node.js Script -----
+//----- Developed by @KLYE || Free to Use for All! || Free to Modify -------
+//----- Rekuirements to run: Node.js + steem.js + node-datetime  -----------
+//----- npm install steem --save  ||  npm install node-datetime --save -----
+//--------------------------------------------------------------------------
+//----- PLEASE DO NOT USE THIS CODE BELOW MALICIOUSLY / FOR EVIL DEEDS -----
+//--------------------------------------------------------------------------
+
+
+//----- CONFIG + Get Rekuirements 
 
 // ***IMPORTANT*** Your Account Name Below (No @)
 var hero = 'daniel.dalo';
@@ -15,6 +26,8 @@ var totalblocks = 0;
 var totalvote = 0;
 var count = 0;
 var totalcomment = 0;
+
+var votingPow = 0.00;
 
 require('events').EventEmitter.defaultMaxListeners = 100;
 
@@ -65,7 +78,7 @@ steem.api.streamBlockNumber(function(err1, newestblock) {
 			var votado = false;
 			
 			//console.log(err1,res);
-			console.log(value + '------' + votes + '----' + author);
+			//console.log(value + '------' + votes + '----' + author);
 			
 			if(value >= votes/10 && votes <= 50 && hours >= 0 && minutes >= 15){
 				console.log('MATCH: ' + 'value:' + value + ' votes:' + votes +' author:' + author + ' ---> ' + "'"+res.root_title+"'" + ' --- Votado:' + votado);
@@ -77,7 +90,11 @@ steem.api.streamBlockNumber(function(err1, newestblock) {
 				  }
 				}
 				
-				if(votado == false){
+				steem.api.getAccounts([hero], function(error, resultado) {
+					votingPow = resultado[0].voting_power/100;
+				});
+				
+				if(votado == false && votingPow >= 90){
 					
 					steem.broadcast.vote(
 					  herowifkey, // Posting WIF
@@ -88,7 +105,7 @@ steem.api.streamBlockNumber(function(err1, newestblock) {
 					  function(err3, result3) {
 						//console.log(err3, result3);
 						console.log('NEW UPVOTE by: ' + hero + ' ------> ' + 'MATCH: ' + author + ' ---> ' + "'"+res.root_title+"'" + ' --- Votado:' + votado);
-						sleep(60000);
+						sleep(3000);
 						totalvote++;
 					  }
 					);
@@ -97,6 +114,6 @@ steem.api.streamBlockNumber(function(err1, newestblock) {
 		}
 	});
 	
-	//sleep(15000);
+	//sleep(60000);
 });
 
